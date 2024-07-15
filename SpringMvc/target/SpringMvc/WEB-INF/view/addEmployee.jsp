@@ -16,15 +16,15 @@
 		<h1>Add Employee</h1>
 		<form action="saveEmployee">
 			<div class="form-floating mb-3">
-				<input type="text" name="emp_name" placeholder="Name"
+				<input type="text"  class="form-control" name="emp_name" placeholder="Name"
 					id="floatingName"> <label for="floatingName">Name</label>
 			</div>
 			<div class="form-floating mb-3">
-				<input type="number" name="emp_salary" placeholder="Salary"
+				<input type="number"  class="form-control" name="emp_salary" placeholder="Salary"
 					id="floatingAddress"> <label for="floatingSalary">Salary</label>
 			</div>
 			<div class="form-floating mb-3">
-				<input type="text" name="emp_address" placeholder="address"
+				<input type="text"  class="form-control" name="emp_address" placeholder="address"
 					id="floatingSalary"> <label for="floatingAddress">Address</label>
 			</div>
 			<button class="btn btn-primary" type="submit">Save Employee</button>

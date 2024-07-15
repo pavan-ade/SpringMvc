@@ -14,20 +14,28 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
 <script type="text/javascript">
-	function addEmployee() {
-		document.frm.action = "addEmployee";
-		document.frm.submit();
+	function actionFrom(formName,id) {
+		if(id===0){
+			document.frm.action = formName;
+			document.frm.submit();
+		}else{
+			
+			document.frm.emp_id = id;
+			document.frm.action = formName;
+			document.frm.submit();
+		}
+		
 	}
 </script>
 <body>
 	<div class="container">
 
 		<form name="frm">
-			<!-- <input type="hidden" name="emp_id"> 
-			<div name="addemployee"> -->
-				<button type="button" onclick="addEmployee()"
+			 <input type="hidden" name="emp_id"> 
+			
+				<button type="button" onclick="actionFrom('addEmployee',0)"
 					class="btn btn-primary">Add Employee</button>
-		<!--	</div> -->
+
 			<table class="table table-success table-striped-columns">
 				<tr>
 					<th>ID</th>
@@ -50,7 +58,7 @@
 						<button class="btn btn-success">Edit</button>
 					</td>
 					<td>
-						<button class="btn btn-warning">Delete</button>
+						<button onclick="actionFrom('deleteEmployee','<%= emp.getId() %>' )" class="btn btn-warning">Delete</button>
 					</td>
 				</tr>
 				<%
