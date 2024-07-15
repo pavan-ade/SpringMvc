@@ -44,4 +44,11 @@ public class EmployeeController {
 		return "redirect:/getshowEmployee";
 	}
 	
+	@RequestMapping("/deleteEmployee")
+	public String deleteEmployee(HttpServletRequest request) {
+		String id = request.getParameter("emp_id");
+
+		empdao.deleteEmployee(Integer.parseInt(id));
+		return "redirect:/getshowEmployee";
+	}
 }
