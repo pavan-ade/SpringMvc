@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mvc.dao.EmployeeDAO;
 import com.mvc.model.Employee;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class EmployeeController {
 	
@@ -23,6 +25,23 @@ public class EmployeeController {
 		List<Employee> allEmployee = empdao.getAllEmployee();
 		 modelAndView.addObject("allEmployee",allEmployee);
 		 return modelAndView;
+	}
+	
+	@RequestMapping("/addEmployee")
+	public ModelAndView addEmployee() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("WEB-INF/view/addEmployee.jsp");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/saveEmployee")
+	public String addEmployee(HttpServletRequest request) {
+		String name = request.getParameter("emp_name");
+		String salary = request.getParameter("emp_salary");
+		String address = request.getParameter("emp_address");
+		Employee emp = new Employee(name, Double.parseDouble(salary), address);   
+		empdao.saveEmployee(emp);
+		return "redirect:/getshowEmployee";
 	}
 	
 }

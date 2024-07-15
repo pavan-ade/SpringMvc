@@ -41,7 +41,7 @@
 	</bean>
 
 
-	<bean id="dao" class="com.mvc.dao.EmployeeDAOImplements">
+	<bean id="dao" class="com.mvc.dao.EmployeeDAOImpl">
 		<property name="DataSource" ref="dataSource" />
 	</bean>
 
