@@ -14,27 +14,33 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
 <script type="text/javascript">
-	function actionFrom(formName,id) {
-		if(id===0){
+	function actionFrom(formName, id) {
+		if (id === 0) {
 			document.frm.action = formName;
 			document.frm.submit();
-		}else{
-			
-			document.frm.emp_id = id;
-			document.frm.action = formName;
-			document.frm.submit();
+		} else {
+			if (formName == 'deleteEmployee') {
+				if(confirm("Do you Want to delete it ?")){
+					document.frm.emp_id.value = id;
+					document.frm.action = formName;
+					
+				}else{
+					document.frm.action = 'getshowEmployee';
+				}
+				document.frm.submit();
+			}
 		}
-		
+
 	}
 </script>
 <body>
 	<div class="container">
 
 		<form name="frm">
-			 <input type="hidden" name="emp_id"> 
-			
-				<button type="button" onclick="actionFrom('addEmployee',0)"
-					class="btn btn-primary">Add Employee</button>
+			<input type="hidden" name="emp_id">
+
+			<button type="button" onclick="actionFrom('addEmployee',0)"
+				class="btn btn-primary">Add Employee</button>
 
 			<table class="table table-success table-striped-columns">
 				<tr>
@@ -58,7 +64,9 @@
 						<button class="btn btn-success">Edit</button>
 					</td>
 					<td>
-						<button onclick="actionFrom('deleteEmployee','<%= emp.getId() %>' )" class="btn btn-warning">Delete</button>
+						<button
+							onclick="actionFrom('deleteEmployee','<%=emp.getId()%>' )"
+							class="btn btn-warning">Delete</button>
 					</td>
 				</tr>
 				<%
