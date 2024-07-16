@@ -1,8 +1,10 @@
 package com.mvc.dao;
 
+import static com.mvc.constains.Queries.DELETE;
+import static com.mvc.constains.Queries.UPDATE;
 import static com.mvc.constains.Queries.INSERT;
 import static com.mvc.constains.Queries.SELECT;
-import static com.mvc.constains.Queries.DELETE;
+import static com.mvc.constains.Queries.SELECTBYID;
 
 import java.util.List;
 
@@ -36,6 +38,18 @@ public class EmployeeDAOImpl extends JdbcDaoSupport implements EmployeeDAO {
 	@Override
 	public void deleteEmployee(Integer id) {
 		getJdbcTemplate().update(DELETE, id);
+	}
+
+	@Override
+	public void updateEmployee(Employee emp) {
+		getJdbcTemplate().update(UPDATE,emp.getName(),emp.getSalary(), emp.getAddress(),emp.getId());
+		
+	}
+
+	@Override
+	public Employee getEmployeeById(Integer id) {
+		List<Employee> emp = getJdbcTemplate().query(SELECTBYID,new Object[] {id}, rowmapper);
+		return emp.get(0);
 	}
 
 }

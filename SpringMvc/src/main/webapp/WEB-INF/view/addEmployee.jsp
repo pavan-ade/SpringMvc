@@ -14,7 +14,7 @@
 <body>
 	<div class="container">
 		<h1>Add Employee</h1>
-		<form action="saveEmployee">
+		<form action="saveEmployee" method="post">
 			<div class="form-floating mb-3">
 				<input type="text"  class="form-control" name="emp_name" placeholder="Name"
 					id="floatingName"> <label for="floatingName">Name</label>

@@ -17,26 +17,29 @@
 	function actionFrom(formName, id) {
 		if (id === 0) {
 			document.frm.action = formName;
-			document.frm.submit();
 		} else {
 			if (formName == 'deleteEmployee') {
-				if(confirm("Do you Want to delete it ?")){
+				if (confirm("Do you Want to delete it ?")) {
 					document.frm.emp_id.value = id;
 					document.frm.action = formName;
-					
-				}else{
-					document.frm.action = 'getshowEmployee';
+
+				} else {
+					document.frm.action = 'getshowAllEmployee';
 				}
-				document.frm.submit();
+				
+			} else if (formName == 'showEmployee') {
+				document.frm.emp_id.value = id;
+				document.frm.action = formName;
 			}
 		}
+		document.frm.submit();
 
 	}
 </script>
 <body>
 	<div class="container">
 
-		<form name="frm">
+		<form name="frm" method="post">
 			<input type="hidden" name="emp_id">
 
 			<button type="button" onclick="actionFrom('addEmployee',0)"
@@ -61,11 +64,11 @@
 					<td><%=emp.getSalary()%></td>
 					<td><%=emp.getAddress()%></td>
 					<td>
-						<button class="btn btn-success">Edit</button>
+						<button onclick="actionFrom('showEmployee','<%=emp.getId()%>' )"
+							class="btn btn-success">Edit</button>
 					</td>
 					<td>
-						<button
-							onclick="actionFrom('deleteEmployee','<%=emp.getId()%>' )"
+						<button onclick="actionFrom('deleteEmployee','<%=emp.getId()%>' )"
 							class="btn btn-warning">Delete</button>
 					</td>
 				</tr>
