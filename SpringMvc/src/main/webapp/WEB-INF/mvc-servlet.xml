@@ -39,10 +39,15 @@
 		<property name="username" value="root" />
 		<property name="password" value="Pavan@123" />
 	</bean>
-
+<!-- 
+	class.ForName()
+	getConnection(url,username,password)
+	setUser()
+	setPassword()
+ -->
 
 	<bean id="dao" class="com.mvc.dao.EmployeeDAOImpl">
-		<property name="DataSource" ref="dataSource" />
+		<property name="DataSource" ref="dataSource" /> <!-- EmployeeDAOImpl dao= new EmployeeDAOImpl().setDataSource(DataBaseConnetion) -->
 	</bean>
 
 </beans>
