@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.mvc.model.Employee"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -16,7 +17,8 @@
 	<div class="container">
 		<h2>Update Employee</h2>
 		<%
-		Employee emp = (Employee) request.getAttribute("employeeById");
+		List<Employee> emps = (List<Employee>) request.getAttribute("employeeById");
+		    for(Employee emp : emps){
 		%>
 
 
@@ -40,6 +42,7 @@
 			<button class="btn btn-primary" type="submit">Update</button>
 			<button class="btn btn-primary">cancel</button>
 		</form>
+		<% } %>
 	</div>
 </body>
 </html>
