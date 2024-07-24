@@ -28,6 +28,7 @@
 					id="floatingSalary"> <label for="floatingAddress">Address</label>
 			</div>
 			<button class="btn btn-primary" type="submit">Save Employee</button>
+			<button class="btn btn-warning" ><a href="getshowAllEmployee" class="nav-link">Cancel</a></button>
 		</form>
 	</div>
 </body>
