@@ -55,7 +55,7 @@ h1, h2 {
 
 		<h1 class="display-2">Employee Management System</h1>
 		<br>
-		<form name="frm" class="row g-3" method="post">
+		<form name="frm"  class="row g-3" method="post">
 			<input type="hidden" name="emp_id">
 
 			<div class="d-flex">

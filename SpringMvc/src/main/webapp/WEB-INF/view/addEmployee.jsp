@@ -1,10 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>save Employee</title>
+	<style>
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+</style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -14,22 +23,30 @@
 <body>
 	<div class="container">
 		<h1>Add Employee</h1>
-		<form action="saveEmployee" method="post">
+		<form:form action="saveEmployee" modelAttribute="employee"  method="post">
 			<div class="form-floating mb-3">
-				<input type="text"  class="form-control" name="emp_name" placeholder="Name"
-					id="floatingName"> <label for="floatingName">Name</label>
+				<form:input type="text" class="form-control" path="name"
+					placeholder="Name" id="floatingName" />
+				<label for="floatingName">Name</label>
+				<form:errors path="name"  cssClass="error"/>
 			</div>
 			<div class="form-floating mb-3">
-				<input type="number"  class="form-control" name="emp_salary" placeholder="Salary"
-					id="floatingAddress"> <label for="floatingSalary">Salary</label>
+				<form:input type="number" class="form-control" path="salary"
+					placeholder="Salary" id="floatingAddress" />
+				<label for="floatingSalary">Salary</label>
+				<form:errors path="salary" cssClass="error"/>
 			</div>
 			<div class="form-floating mb-3">
-				<input type="text"  class="form-control" name="emp_address" placeholder="address"
-					id="floatingSalary"> <label for="floatingAddress">Address</label>
+				<form:input type="text" class="form-control" path="Address"
+					placeholder="address" id="floatingSalary" />
+				<label for="floatingAddress">Address</label>
+				<form:errors path="Address" cssClass="error"/>
 			</div>
 			<button class="btn btn-primary" type="submit">Save Employee</button>
-			<button class="btn btn-warning" ><a href="getshowAllEmployee" class="nav-link">Cancel</a></button>
-		</form>
+			<button class="btn btn-warning">
+				<a href="getshowAllEmployee" class="nav-link">Cancel</a>
+			</button>
+		</form:form>
 	</div>
 </body>
 </html>

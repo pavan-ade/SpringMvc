@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,6 +14,7 @@ import com.mvc.model.Employee;
 import com.mvc.service.EmployeeService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @Controller
 public class EmployeeController {
@@ -29,17 +33,16 @@ public class EmployeeController {
 
 	@RequestMapping("/addEmployee")
 	public ModelAndView addEmployee() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("WEB-INF/view/addEmployee.jsp");
+		Employee emp = new Employee();
+		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/addEmployee.jsp","employee",emp);
 		return modelAndView;
 	}
 
 	@RequestMapping("/saveEmployee")
-	public String addEmployee(HttpServletRequest request) {
-		String name = request.getParameter("emp_name");
-		String salary = request.getParameter("emp_salary");
-		String address = request.getParameter("emp_address");
-		Employee emp = new Employee(name, Double.parseDouble(salary), address);
+	public String addEmployee(@Validated Employee emp , BindingResult result) {
+		if(result.hasErrors()) {
+			return "WEB-INF/view/addEmployee.jsp";
+		}	
 		service.saveEmployee(emp);
 		return "redirect:/getshowAllEmployee";
 	}
@@ -54,22 +57,25 @@ public class EmployeeController {
 
 	@RequestMapping("/showEmployee")
 	public ModelAndView showEmployee(HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView();
+		
 		String id = request.getParameter("emp_id");
 		List<Employee> employeeById = service.getEmployeeById(Integer.valueOf(id));
-		modelAndView.addObject("employeeById",employeeById);
-		modelAndView.setViewName("WEB-INF/view/editEmployee.jsp");
+		Employee employee = employeeById.get(0);
+		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/editEmployee.jsp","employee",employee);
+	//	modelAndView.addObject("employeeById",employeeById);
+		
 		return modelAndView;
 	}
 	
 	@RequestMapping("/updateEmployee")
-	public String updateEmployee(HttpServletRequest request) {
-		String id = request.getParameter("emp_id");
-		String name = request.getParameter("emp_name");
-		String salary = request.getParameter("emp_salary");
-		String address = request.getParameter("emp_address");
-		Employee employee = new Employee(Integer.valueOf(id), name, Double.valueOf(salary), address);
-		service.updateEmployee(employee);
+	public String updateEmployee(@Validated Employee emp , BindingResult result) {
+		
+//		String address = request.getParameter("emp_address");
+//		Employee employee = new Employee(Integer.valueOf(id), name, Double.valueOf(salary), address);
+		if(result.hasErrors()) {
+			return "WEB-INF/view/editEmployee.jsp";
+		}		
+		service.updateEmployee(emp);
 		
 		return "redirect:/getshowAllEmployee";
 	}
