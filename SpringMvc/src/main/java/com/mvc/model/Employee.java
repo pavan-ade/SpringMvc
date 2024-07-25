@@ -14,7 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee implements Serializable{
+	@NotBlank
 	private Integer id;
+	
 	@NotBlank(message = "name must and shold be fill!!!")
 	@Size(max = 45, message = "Plase maintain character size between 0 to 45")
 	private String name;

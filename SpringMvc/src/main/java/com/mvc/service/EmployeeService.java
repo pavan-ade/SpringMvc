@@ -39,10 +39,14 @@ public class EmployeeService {
 		if (type.equals("name")) {
 			return dao.getEmployeeByName(value);
 		} else if (type.equals("id")) {
+			if(value == "")
+				value = "0";
 			return dao.getEmployeeById(Integer.valueOf(value));
 		} else if (type.equals("address")) {
 			return dao.getEmployeeByAddress(value);
 		} else if (type.equals(">=") || type.equals("<=") || type.equals("=")) {
+			if(value == "")
+				value = "0";
 			return dao.getEmployeeBySalary(type, Double.valueOf(value));
 		}
 		return null;

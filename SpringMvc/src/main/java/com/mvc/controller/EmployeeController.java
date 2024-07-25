@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 public class EmployeeController {
 
 	@Autowired
-	private  EmployeeService service;
+	private EmployeeService service;
 
 	@RequestMapping("/getshowAllEmployee")
 	public ModelAndView getshowEmployee() {
@@ -34,15 +34,15 @@ public class EmployeeController {
 	@RequestMapping("/addEmployee")
 	public ModelAndView addEmployee() {
 		Employee emp = new Employee();
-		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/addEmployee.jsp","employee",emp);
+		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/addEmployee.jsp", "employee", emp);
 		return modelAndView;
 	}
 
 	@RequestMapping("/saveEmployee")
-	public String addEmployee(@Validated Employee emp , BindingResult result) {
-		if(result.hasErrors()) {
+	public String addEmployee(@Validated Employee emp, BindingResult result) {
+		if (result.hasErrors()) {
 			return "WEB-INF/view/addEmployee.jsp";
-		}	
+		}
 		service.saveEmployee(emp);
 		return "redirect:/getshowAllEmployee";
 	}
@@ -57,38 +57,37 @@ public class EmployeeController {
 
 	@RequestMapping("/showEmployee")
 	public ModelAndView showEmployee(HttpServletRequest request) {
-		
+
 		String id = request.getParameter("emp_id");
 		List<Employee> employeeById = service.getEmployeeById(Integer.valueOf(id));
 		Employee employee = employeeById.get(0);
-		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/editEmployee.jsp","employee",employee);
-	//	modelAndView.addObject("employeeById",employeeById);
-		
+		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/editEmployee.jsp", "employee", employee);
+
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/updateEmployee")
-	public String updateEmployee(@Validated Employee emp , BindingResult result) {
-		
-//		String address = request.getParameter("emp_address");
-//		Employee employee = new Employee(Integer.valueOf(id), name, Double.valueOf(salary), address);
-		if(result.hasErrors()) {
+	public String updateEmployee(@Validated Employee emp, BindingResult result) {
+
+		if (result.hasErrors()) {
 			return "WEB-INF/view/editEmployee.jsp";
-		}		
+		}
 		service.updateEmployee(emp);
-		
+
 		return "redirect:/getshowAllEmployee";
 	}
-	
+
 	@RequestMapping("/searchEmployee")
 	public ModelAndView searchEmployee(HttpServletRequest request) {
-		
+
 		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/showEmployee.jsp");
 		String type = request.getParameter("search_type");
 		String value = request.getParameter("search_value");
-		List<Employee> searchEmployee = service.searchEmployee(type, value);
-		modelAndView.addObject("allEmployee",searchEmployee);
 		
+		
+		List<Employee> searchEmployee = service.searchEmployee(type, value);
+		modelAndView.addObject("allEmployee", searchEmployee);
+
 		return modelAndView;
 	}
 }
