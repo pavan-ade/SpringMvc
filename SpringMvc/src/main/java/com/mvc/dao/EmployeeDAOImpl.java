@@ -17,23 +17,30 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.mvc.model.Employee;
 
 public class EmployeeDAOImpl extends JdbcDaoSupport implements EmployeeDAO {
-
+	private EmployeeRowMapper rowmapper;
+	
 	@Autowired
-	EmployeeRowMapper rowmapper;
-
-	@Autowired
-	public EmployeeDAOImpl(DataSource datasource) {
-		setDataSource(datasource);
+	public EmployeeDAOImpl(EmployeeRowMapper rowmapper) {
+		this.rowmapper = rowmapper;
 	}
-
+	
+ 	public EmployeeDAOImpl(DataSource datasource) {
+		setDataSource(datasource);
+		
+	}
+ 	
+ 	
+ 	
 	@Override
 	public List<Employee> getAllEmployee() {
 		return getJdbcTemplate().query(SELECT, rowmapper);
+		 
 	}
 
 	@Override
@@ -52,18 +59,21 @@ public class EmployeeDAOImpl extends JdbcDaoSupport implements EmployeeDAO {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<Employee> getEmployeeById(Integer id) {
 		return getJdbcTemplate().query(SELECTBYID, new Object[] { id }, rowmapper);
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<Employee> getEmployeeByName(String name) {
 		return getJdbcTemplate().query(SELECTBYNAME, new Object[] { ("%" + name) }, rowmapper);
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<Employee> getEmployeeBySalary(String type, Double salary) {
 
@@ -77,6 +87,7 @@ public class EmployeeDAOImpl extends JdbcDaoSupport implements EmployeeDAO {
 		return new ArrayList<>();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<Employee> getEmployeeByAddress(String address) {
 		return getJdbcTemplate().query(SELECTBYADDRESS, new Object[] { address }, rowmapper);

@@ -1,5 +1,6 @@
 package com.mvc.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +40,17 @@ public class EmployeeService {
 		if (type.equals("name")) {
 			return dao.getEmployeeByName(value);
 		} else if (type.equals("id")) {
-			if(value == "")
+			if(value.equals(""))
 				value = "0";
 			return dao.getEmployeeById(Integer.valueOf(value));
 		} else if (type.equals("address")) {
 			return dao.getEmployeeByAddress(value);
 		} else if (type.equals(">=") || type.equals("<=") || type.equals("=")) {
-			if(value == "")
+			if(value.equals(""))
 				value = "0";
 			return dao.getEmployeeBySalary(type, Double.valueOf(value));
 		}
-		return null;
+		return new ArrayList<>();
 	}
 
 }

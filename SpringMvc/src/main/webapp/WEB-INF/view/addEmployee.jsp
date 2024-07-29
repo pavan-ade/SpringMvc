@@ -3,7 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>save Employee</title>
@@ -37,10 +37,10 @@
 				<form:errors path="salary" cssClass="error"/>
 			</div>
 			<div class="form-floating mb-3">
-				<form:input type="text" class="form-control" path="Address"
+				<form:input type="text" class="form-control" path="address"
 					placeholder="address" id="floatingSalary" />
 				<label for="floatingAddress">Address</label>
-				<form:errors path="Address" cssClass="error"/>
+				<form:errors path="address" cssClass="error"/>
 			</div>
 			<button class="btn btn-primary" type="submit">Save Employee</button>
 			<button class="btn btn-warning">

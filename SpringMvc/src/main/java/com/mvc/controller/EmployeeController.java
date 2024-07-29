@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +13,6 @@ import com.mvc.model.Employee;
 import com.mvc.service.EmployeeService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 
 @Controller
 public class EmployeeController {
@@ -34,8 +32,8 @@ public class EmployeeController {
 	@RequestMapping("/addEmployee")
 	public ModelAndView addEmployee() {
 		Employee emp = new Employee();
-		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/addEmployee.jsp", "employee", emp);
-		return modelAndView;
+		return new ModelAndView("WEB-INF/view/addEmployee.jsp", "employee", emp);
+		
 	}
 
 	@RequestMapping("/saveEmployee")
@@ -49,7 +47,7 @@ public class EmployeeController {
 
 	@RequestMapping("/deleteEmployee")
 	public String deleteEmployee(HttpServletRequest request) {
-		String id = request.getParameter("emp_id");
+		String id = request.getParameter("id");
 
 		service.deleteEmployee(Integer.parseInt(id));
 		return "redirect:/getshowAllEmployee";
@@ -58,12 +56,11 @@ public class EmployeeController {
 	@RequestMapping("/showEmployee")
 	public ModelAndView showEmployee(HttpServletRequest request) {
 
-		String id = request.getParameter("emp_id");
+		String id = request.getParameter("id");
 		List<Employee> employeeById = service.getEmployeeById(Integer.valueOf(id));
 		Employee employee = employeeById.get(0);
-		ModelAndView modelAndView = new ModelAndView("WEB-INF/view/editEmployee.jsp", "employee", employee);
+	return new ModelAndView("WEB-INF/view/editEmployee.jsp", "employee", employee);
 
-		return modelAndView;
 	}
 
 	@RequestMapping("/updateEmployee")

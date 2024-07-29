@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>show Employees</title>
@@ -31,14 +31,14 @@ h1, h2 {
 		} else {
 			if (formName === 'deleteEmployee') {
 				if (confirm("Do you Want to delete it ?")) {
-					document.frm.emp_id.value = id;
+					document.frm.id.value = id;
 					document.frm.action = formName;
 				} else {
 					document.frm.action = 'getshowAllEmployee';
 				}
 
 			} else if (formName === 'showEmployee') {
-				document.frm.emp_id.value = id;
+				document.frm.id.value = id;
 				document.frm.action = formName;
 			}
 		}
@@ -56,7 +56,7 @@ h1, h2 {
 		<h1 class="display-2">Employee Management System</h1>
 		<br>
 		<form name="frm"  class="row g-3" method="post">
-			<input type="hidden" name="emp_id">
+			<input type="hidden" name="id">
 
 			<div class="d-flex">
 				<div class="p-2 flex-grow-1">
